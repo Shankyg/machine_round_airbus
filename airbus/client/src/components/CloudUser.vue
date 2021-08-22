@@ -1,8 +1,6 @@
 <template>
   <div>
-    
-{{content.name}}
-  <table class="table table-hover">
+  <table id="myTable" class="table table-hover table-bordered mt-5">
   <thead class="thead-dark">
     <tr>
        <th scope="col">#</th>
@@ -14,37 +12,15 @@
   </thead>
   <tbody>
     
-    <tr v-for="(user,index) in content" :key="user.id">
-      <th scope="row">{{index+1}}</th>
-      <td>{{user.name}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.role}}</td>
-      <td>{{user.createdAt}}</td>
-
-    </tr>
   </tbody>
 </table>
-<nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item active" aria-current="page">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
+
   </div>
 </template>
 
 <script>
 import UserService from "../services/user.service";
-
+import $ from "jquery";
 export default {
   name: "User",
   created: function () {
@@ -57,11 +33,19 @@ export default {
     };
   },
 methods:{
-  getUsers:function (){
+  getUsers(){
     UserService.getUserBoard().then(
       (response) => {
-        this.content = response.data;
-        console.log(this.content)
+        $('#myTable').DataTable( {
+    data: response.data,
+    columns: [
+        { data: 'id' },
+        { data: 'name' },
+        { data: 'email' },
+        { data: 'role' },
+        { data: 'createdAt' }
+    ]
+} );
       },
       (error) => {
         this.content =
