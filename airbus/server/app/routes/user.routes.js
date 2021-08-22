@@ -13,4 +13,12 @@ module.exports = function(app) {
     "/api/users",
     [authJwt.verifyToken], controller.user
   );
+  app.post(
+    "/api/update",
+    [authJwt.verifyToken], controller.updateUser
+  );
+  app.post(
+    "/api/delete",
+    [authJwt.verifyToken], controller.deleteUser
+  );
 };
