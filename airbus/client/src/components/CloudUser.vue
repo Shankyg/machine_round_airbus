@@ -8,6 +8,7 @@
       <th scope="col">Email</th>
       <th scope="col">Role</th>
       <th scope="col">Created At</th>
+      <!-- <th scope="col">Actions</th> -->
     </tr>
   </thead>
   <tbody>
@@ -21,17 +22,12 @@
 <script>
 import UserService from "../services/user.service";
 import $ from "jquery";
+
 export default {
   name: "User",
   created: function () {
-      this.getUsers()
-      console.log('mounted: got here')
+      this.getUsers();
     },
-  data() {
-    return {
-      content: [],
-    };
-  },
 methods:{
   getUsers(){
     UserService.getUserBoard().then(
@@ -39,23 +35,45 @@ methods:{
         $('#myTable').DataTable( {
     data: response.data,
     columns: [
-        { data: 'id' },
+        { data: null,
+          render: function(data,type,row,meta){
+            return meta.row+1;
+
+          }
+        },
         { data: 'name' },
         { data: 'email' },
         { data: 'role' },
-        { data: 'createdAt' }
+        { data: 'createdAt' },
+        // {
+        //   data: 'id',
+        //   render: function(data){
+        //     let editbtn = `<button data-id="${data}" class="btn btn-info" id="edit">Edit</button>`;
+        //     let dlbtn = `<button data-id="${data}" class="btn btn-danger" id="delete">Delete</button>`;
+        //     return editbtn+dlbtn
+        //   }
+        // }
     ]
 } );
       },
       (error) => {
-        this.content =
-          (error.response &&
+        console.error((error.response &&
             error.response.data &&
             error.response.data.message) ||
           error.message ||
-          error.toString();
+          error.toString());
       }
     );
+    //  $(document).on('click','#edit',function(){
+    //    let id = $(this).data("id");
+    //    userService.editUser(id);
+    //    this.getUsers();
+    //  });
+    //  $(document).on('click','#delete',function(){
+    //    let id = $(this).data("id");
+    //    userService.deleteUser(id);
+    //    this.getUsers();
+    //  });
   }
   },
 };
