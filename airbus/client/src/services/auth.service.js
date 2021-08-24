@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/auth/';
+const API_URL = process.env.BackEndURL||'http://localhost:8080/api/';
 
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + 'signin', {
+      .post(API_URL + 'auth/signin', {
         email: user.email,
         password: user.password
       })
@@ -23,7 +23,7 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + 'signup', {
+    return axios.post(API_URL + 'auth/signup', {
       email: user.email,
       password: user.password,
       name: user.name,
