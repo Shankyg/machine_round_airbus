@@ -21,6 +21,11 @@ describe("Check method \'signup\' ", () => {
      await signup(req, res);
       expect(spy).toBeCalled();
       expect(res.status).toHaveBeenCalledWith(200);
+      User.destroy({
+        where:{
+            email: "test@test.com"
+        }
+      })
     });
   });
 

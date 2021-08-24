@@ -52,7 +52,7 @@ exports.deleteUser = (req, res)=>{
       if (user.role === "admin") {
         User.destroy({
           where:{
-            id: req.payload.id
+            id: req.data.id
           }
         })
         .then(() => {
