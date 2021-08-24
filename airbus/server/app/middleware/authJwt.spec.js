@@ -16,17 +16,4 @@ describe("Check method \'verifyToken\' ", () => {
   
       expect(res.status).toHaveBeenCalledWith(403);
     });
-  
-    // test('should call jwt.verify', async () => {
-    //     let req = getMockReq({
-    //         headers:{
-    //           "x-access-token": 1
-    //         }
-    //     });
-    //     const {res,next} = getMockRes({
-    //         status:jest.fn()
-    //     });
-    // authJwt.verifyToken(req, res, next);
-    // expect(jwt.verify).toBeCalled();
-    // });
   });
