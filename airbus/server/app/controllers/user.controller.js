@@ -31,7 +31,7 @@ exports.updateUser = (req, res)=>{
           role: req.body.data.role
         },{
           where:{
-            id = req.body.data.id
+            id :req.body.data.id
           }
         })
         .then(()=> {

@@ -15,7 +15,7 @@ exports.signup = (req, res) => {
     role: req.body.role
   })
     .then(() => {
-          res.send({ message: "User was registered successfully!" });
+          res.status(200).send({ message: "User was registered successfully!" });
         })
     .catch(err => {
       res.status(500).send({ message: err.message });

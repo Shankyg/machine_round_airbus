@@ -26,6 +26,4 @@ db.sequelize = sequelize;
 
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 
-db.ROLES = ["user", "admin"];
-
 module.exports = db;
