@@ -21,4 +21,10 @@ module.exports = function(app) {
     "/api/delete",
     [authJwt.verifyToken], controller.deleteUser
   );
+  app.get(
+    "/test",
+    (req,res)=>{
+      res.send("health check")
+    }
+  );
 };
