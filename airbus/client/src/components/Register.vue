@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="card card-container">
       <img
         id="profile-img"
@@ -23,12 +23,31 @@
             <Field name="password" type="password" class="form-control" />
             <ErrorMessage name="password" class="error-feedback" />
           </div>
-          <div class="form-group">
-            <label for="role">Role</label>
-            <Field name="role" type="role" class="form-control" />
-            <ErrorMessage name="role" class="error-feedback" />
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <Field
+              class="form-check-input"
+              type="radio"
+              name="role"
+              id="inlineRadio1"
+              value="user"
+            />
+            <label class="form-check-label" for="inlineRadio1">user</label>
           </div>
-
+          <div class="form-check form-check-inline">
+            <Field
+              class="form-check-input"
+              type="radio"
+              name="role"
+              id="inlineRadio2"
+              value="admin"
+            />
+            <label class="form-check-label" for="inlineRadio2">admin</label>
+          </div>
+          <div>
+          <ErrorMessage name="role" class="error-feedback" />
+          </div>
+        </div>
           <div class="form-group">
             <button class="btn btn-primary btn-block" :disabled="loading">
               <span
@@ -66,19 +85,17 @@ export default {
   data() {
     const schema = yup.object().shape({
       name: yup
-        .string()
+        .string().trim()
         .required("Name is required!")
         .max(50, "Must be maximum 50 characters!"),
-      role: yup
-        .string()
-        .required("Role is required!"), 
+      role: yup.string().required("Role is required"),
       email: yup
-        .string()
+        .string().trim()
         .required("Email is required!")
         .email("Email is invalid!")
         .max(50, "Must be maximum 50 characters!"),
       password: yup
-        .string()
+        .string().trim()
         .required("Password is required!")
         .min(6, "Must be at least 6 characters!")
         .max(40, "Must be maximum 40 characters!"),

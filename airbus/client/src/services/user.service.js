@@ -8,6 +8,9 @@ class UserService {
   getUserBoard() {
     return axios.get(API_URL + 'users', { headers: authHeader() });
   }
+  deleteUser(data) {
+    return axios.post(API_URL + 'delete',{id:data}, { headers: authHeader()});
+  }
 }
 
 export default new UserService();
